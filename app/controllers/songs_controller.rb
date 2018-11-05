@@ -11,13 +11,37 @@ class SongsController < ApplicationController
     @song = Song.new
   end
 
+  def create
+    @song = Song.new(song_params)
+
+    if @song.save
+      redirect_to @song
+    else
+      render :new
+    end
+  end
+
   def edit
     @song = Song.find(params[:id])
   end
 
-  def create
-    song = Song.create(song_params)
-    redirect_to controller: 'songs', action: 'index'
+  def update
+    @song = Song.find(params[:id])
+
+    @song.update(song_params)
+
+    if @song.save
+      redirect_to @song
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @song = Song.find(params[:id])
+    @song.destroy
+    flash[:notice] = "Song deleted."
+    redirect_to songs_path
   end
 
   private
