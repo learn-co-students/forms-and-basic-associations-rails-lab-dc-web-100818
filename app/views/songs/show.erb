@@ -1,0 +1,16 @@
+<h1>Title: <%= @song.title %></h1>
+
+<h3>Artist: <%= @song.artist_name %></h3>
+
+<h3>Genre: <%= @song.genre_name %></h3>
+
+<h3>Notes for this Song:</h3>
+
+<ul>
+    <% @song.note_contents.each do |note| %>
+        <h6><%= note %></h6>
+    <% end %>
+</ul>
+
+<p><%= link_to "Songs Index", songs_path %></p>
+
